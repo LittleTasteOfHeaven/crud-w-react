@@ -1,0 +1,9 @@
+.product-add-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.product-add-form .submit {
+  cursor: pointer;
+}

@@ -1,0 +1,33 @@
+.product {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.product .details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.product .details>* {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+.product .delete {
+  cursor: pointer;
+}
+
+.product .edit {
+  cursor: pointer;
+}
+
+.product .save {
+  cursor: pointer;
+}
