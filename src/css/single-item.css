@@ -31,3 +31,7 @@
 .product .save {
   cursor: pointer;
 }
+
+.product .check {
+  cursor: pointer;
+}
