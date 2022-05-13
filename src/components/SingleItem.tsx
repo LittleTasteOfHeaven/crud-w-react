@@ -86,7 +86,10 @@ export function SingleItem(props: propsT) {
 					</div>}
 			</div>
 
-			<button value={id} className="delete" onClick={deleteProductFn}>
+			<button
+				data-id={id}
+				className="delete"
+				onClick={deleteProductFn}>
 				Delete
 			</button>
 			<input

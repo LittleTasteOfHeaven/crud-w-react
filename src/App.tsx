@@ -79,8 +79,11 @@ function App() {
 
 	const deleteProductFn =
 		(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-			const productId = (event.target as HTMLButtonElement).value;
-			setProductsSt(productsSt.filter(product => product!.id !== productId));
+			const productID = (event.target as HTMLButtonElement).dataset['id'];
+			const products = [...productsSt];
+			const index = products.findIndex(item => item!.id === productID);
+			products.splice(index, 1);
+			setProductsSt(products);
 		};
 
 	const saveProductAttrFn =
@@ -110,9 +113,10 @@ function App() {
 
 				<div>
 					{productsSt.map(
-						(product, idx) =>
-							<SingleItem
-								key={idx}
+						(product, idx) => {
+							console.log(product);
+							return <SingleItem
+								key={product!.id}
 								id={product!.id}
 								name={product!.name}
 								price={product!.price}
@@ -120,8 +124,8 @@ function App() {
 								deleteProductFn={deleteProductFn}
 								saveProductAttrFn={saveProductAttrFn}
 								alterCheckedFn={alterCheckedFn}
-							/>
-					)}
+							/>;
+						})}
 				</div>
 			</div>
 		</div>
