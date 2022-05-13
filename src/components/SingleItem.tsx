@@ -5,7 +5,6 @@ export type propsT = {
 	id: string,
 	name: string,
 	price: string,
-	checked: boolean,
 	deleteProductFn:
 	(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	saveProductAttrFn:
@@ -19,7 +18,6 @@ export function SingleItem(props: propsT) {
 		id,
 		name,
 		price,
-		checked,
 		deleteProductFn,
 		saveProductAttrFn,
 		alterCheckedFn
@@ -28,6 +26,8 @@ export function SingleItem(props: propsT) {
 	const [attrSt, setAttrSt] = React.useState({ id, name, price });
 
 	const [editableSt, setEditableSt] = React.useState(false);
+
+	const [checkedSt, setCheckedSt] = React.useState(false);
 
 	const editAttrFn = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
@@ -96,8 +96,11 @@ export function SingleItem(props: propsT) {
 				type="checkbox"
 				className="check"
 				data-id={id}
-				checked={checked}
-				onChange={alterCheckedFn} />
+				checked={checkedSt}
+				onChange={(event) => {
+					setCheckedSt(!checkedSt);
+					alterCheckedFn(event);
+				}} />
 		</div>
 	);
 }

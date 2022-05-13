@@ -21,8 +21,6 @@ let products = [
 	}
 ];
 
-type selectedStT = boolean[];
-
 type productsStT = {
 	id: string,
 	name: string,
@@ -31,22 +29,19 @@ type productsStT = {
 
 function App() {
 	const [productsSt, setProductsSt] = React.useState<productsStT>(products);
-	const initUnchecked: boolean[] = Array(products.length).fill(false);
-	const [selectedSt, setSelectedSt] = React.useState<selectedStT>(initUnchecked);
+	
+	const selected: boolean[] = Array(products.length).fill(false);
 
 	const alterCheckedFn =
 		(event: React.ChangeEvent<HTMLInputElement>) => {
 			const inputElement = event.target as HTMLInputElement;
 			const productID = (event.target as HTMLInputElement).dataset['id'];
 			const index = productsSt.findIndex(item => item!.id === productID);
-			const selected = [...selectedSt];
 			selected[index] = inputElement.checked;
-			setSelectedSt(selected);
 		};
 
 	const deleteCheckedFn = () => {
 		const products = [...productsSt];
-		const selected = [...selectedSt];
 
 		for (let idx = 0; idx < selected.length;) {
 			if (selected[idx]) {
@@ -56,9 +51,7 @@ function App() {
 				idx += 1;
 			}
 		}
-
 		setProductsSt(products);
-		setSelectedSt(selected);
 	};
 
 	const addProductFn =
@@ -113,14 +106,12 @@ function App() {
 
 				<div>
 					{productsSt.map(
-						(product, idx) => {
-							console.log(product);
+						product => {
 							return <SingleItem
 								key={product!.id}
 								id={product!.id}
 								name={product!.name}
 								price={product!.price}
-								checked={selectedSt[idx]}
 								deleteProductFn={deleteProductFn}
 								saveProductAttrFn={saveProductAttrFn}
 								alterCheckedFn={alterCheckedFn}
